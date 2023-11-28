@@ -8,16 +8,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class TownRequestDto {
+public class CountryRequestDto {
 
     private Long id;
 
-    @NotNull(message="Town name is required")
-    @Size(min=3, message="Town name must be at least 3 characters long")
-    @Pattern(regexp = "^[A-Z][a-zA-Z\\s\\-]*$", message = "Town name must start with a capital "
+    @NotNull(message="Country name is required")
+    @Size(min=3, message="Country name must be at least 3 characters long")
+    @Pattern(regexp = "^[A-Z][a-zA-Z\\s\\-]*$", message = "Country must start with a capital "
             + "letter and can consist of letters, spaces, and hyphens")
     @JsonDeserialize(using = TrimStringDeserializer.class)
     private String name;
-
-    private Long countryId;
 }
