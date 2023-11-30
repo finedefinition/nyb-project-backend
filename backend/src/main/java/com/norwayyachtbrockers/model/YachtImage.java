@@ -1,7 +1,8 @@
 package com.norwayyachtbrockers.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,28 +13,28 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "locations")
+@Table(name = "yacht_images")
 @Getter
 @Setter
-public class Location {
+public class YachtImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("yacht_image_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false, foreignKey = @ForeignKey(name = "FK_Location_Country"))
-    private Country country;
+    @Column(name = "image_key", nullable = false)
+    private String imageKey;
 
     @ManyToOne
-    @JoinColumn(name = "town_id", foreignKey = @ForeignKey(name = "FK_Location_Town"))
-    private Town town;
+    @JoinColumn(name = "yacht_id")
+    private Yacht yacht;
 
-    public Location() {
+
+    public YachtImage() {
     }
 
-    public Location(Country country, Town town) {
-        this.country = country;
-        this.town = town;
+    public YachtImage(String imageKey) {
+        this.imageKey = imageKey;
     }
 }
